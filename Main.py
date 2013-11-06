@@ -31,7 +31,7 @@ def main():
 
     bestM = 1
     bestS = 100000000000
-    bestR = 0
+    bestR = 1
     for m in  range(15,16):
 
         jobs = JobManager.JobManager(k,'input1.txt')
