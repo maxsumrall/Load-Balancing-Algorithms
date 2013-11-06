@@ -1,8 +1,10 @@
 __author__ = 'max'
+import Job
 #aka the GOD file. Ask God for a job, he retuns the next job.
 
 class JobManager:
-    def __init__(self,kLookAhead,inputFile):
+    def __init__(self,kLookAhead,inputFile,numberOfMachines):
+        self.numberOfMachines = numberOfMachines
         self.readFile = open(inputFile,'r')
         self.jobs = []
         self.lookAhead = kLookAhead
@@ -11,11 +13,14 @@ class JobManager:
         self.jobs = self.readFile.readlines()
         self.readFile.close()
         for i in range(len(self.jobs)):
-            self.jobs[i] = float(self.jobs[i].replace('\n',''))
+            self.jobs[i] = Job.Job(int(self.jobs[i].replace('\n','')),self.numberOfMachines)
             self.sumJobTime += float(self.jobs[i])
         self.maxJob = max(self.jobs)
     def __str__(self):
-        print self.jobs
+        output = ''
+        for each in self.jobs:
+            output+=each
+        return output
 
     def __iter__(self):
         for i in range(len(self.jobs)):
