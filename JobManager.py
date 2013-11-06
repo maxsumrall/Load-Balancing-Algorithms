@@ -11,9 +11,9 @@ class JobManager:
         self.jobs = self.readFile.readlines()
         self.readFile.close()
         for i in range(len(self.jobs)):
-            self.jobs[i] = self.jobs[i].replace('\n','')
+            self.jobs[i] = float(self.jobs[i].replace('\n',''))
             self.sumJobTime += float(self.jobs[i])
-
+        self.maxJob = max(self.jobs)
     def __str__(self):
         print self.jobs
 

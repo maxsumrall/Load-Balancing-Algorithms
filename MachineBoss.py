@@ -8,7 +8,11 @@ class MachineBoss:
         for i in range(numberOfMachines):
             self.machines.append(Machine.Machine())
         next = (i for i in self.machines)
-
+    def __str__(self):
+        string = "Loads on Machines: \n"
+        for each in self.machines:
+            string += "Machine Load: " + str(each) + "\n"
+        return string
 
     def __iter__(self):
         for i in self.machines:

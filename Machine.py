@@ -4,6 +4,8 @@ class Machine:
     def __init__(self):
         self.makeSpan = 0.0
         self.jobs = []
+    def __str__(self):
+        return str(self.makeSpan)
     def addJob(self,job):
         self.jobs.append(job)
         self.makeSpan += int(job)
