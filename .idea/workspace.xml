@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6e9e04f-04eb-478c-9fa2-35f6ab5736ef" name="Default" comment="nth commit">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Job.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RandomSearch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/JobManager.py" afterPath="$PROJECT_DIR$/JobManager.py" />
+    <list default="true" id="b6e9e04f-04eb-478c-9fa2-35f6ab5736ef" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="advAlgProject.iws" />
@@ -383,7 +380,11 @@
       <created>1383751123945</created>
       <updated>1383751123945</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="nth commit">
+      <created>1383758746059</created>
+      <updated>1383758746059</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
