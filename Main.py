@@ -5,19 +5,19 @@ import GreedyScheduler
 import SortedGreedyScheduler
 
 def main():
-    k=10
+    k=100
     bestM = 1
     bestS = 100000000000
     bestR = 0
-    for m in  range(2,3):
+    for m in  range(15,16):
 
-        jobs = JobManager.JobManager(k,'increasing.txt')
+        jobs = JobManager.JobManager(k,'input1.txt')
         machines = MachineBoss.MachineBoss(m)
         GreedyScheduler.GreedyScheduler(machines,jobs)
 
 
         makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/m
+        ratio = jobs.sumJobTime/float(m)
         bestS,bestM = "",""
         if makeSpan < bestS:
             bestS = makeSpan
@@ -29,17 +29,18 @@ def main():
     print "Best: m= "+ str(bestM) + " Greedy makespan: " + str(bestS) + " ratio: " + str(bestR)
 
 
+    bestM = 1
     bestS = 100000000000
+    bestR = 0
+    for m in  range(15,16):
 
-    for m in  range(2,3):
-
-        jobs = JobManager.JobManager(k,'increasing.txt')
+        jobs = JobManager.JobManager(k,'input1.txt')
         machines = MachineBoss.MachineBoss(m)
         SortedGreedyScheduler.SortedGreedyScheduler(machines,jobs)
 
 
         makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/m
+        ratio = jobs.sumJobTime/float(m)
         bestS,bestM = "",""
         if makeSpan < bestS:
             bestS = makeSpan

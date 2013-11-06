@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6e9e04f-04eb-478c-9fa2-35f6ab5736ef" name="Default" comment="" />
+    <list default="true" id="b6e9e04f-04eb-478c-9fa2-35f6ab5736ef" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main.py" afterPath="$PROJECT_DIR$/Main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="advAlgProject.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -50,13 +54,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Main.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="31" selection-start="1100" selection-end="1100" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="915">
-              <folding>
-                <marker date="1383738524000" expanded="true" signature="120:1545" placeholder="..." />
-              </folding>
+            <state line="39" column="0" selection-start="1098" selection-end="1098" vertical-scroll-proportion="0.52868855" vertical-offset="153" max-vertical-offset="885">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="input1.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/input1.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="891" column="1" selection-start="1984" selection-end="1984" vertical-scroll-proportion="0.0" vertical-offset="13330" max-vertical-offset="14145">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -70,10 +81,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Distributor.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Distributor.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Distributor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
+            <state line="7" column="12" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
               <folding />
             </state>
           </provider>
@@ -95,6 +106,14 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
@@ -105,10 +124,10 @@
         <option value="$PROJECT_DIR$/input1.txt" />
         <option value="$PROJECT_DIR$/increasing.txt" />
         <option value="$PROJECT_DIR$/SortedGreedyScheduler.py" />
-        <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/JobManager.py" />
         <option value="$PROJECT_DIR$/NormalDistributor" />
         <option value="$PROJECT_DIR$/Distributor.py" />
+        <option value="$PROJECT_DIR$/Main.py" />
       </list>
     </option>
   </component>
@@ -117,7 +136,7 @@
     <option name="width" value="1436" />
     <option name="height" value="878" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -143,7 +162,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -164,6 +182,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -171,8 +190,8 @@
     <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -336,7 +355,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32950193" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2834262" sideWeight="0.6704981" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -347,6 +365,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32950193" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -374,9 +393,7 @@
     <entry file="file://$PROJECT_DIR$/Main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="31" selection-start="1152" selection-end="1152" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="915">
-          <folding>
-            <marker date="1383738524000" expanded="true" signature="120:1545" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -436,23 +453,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="31" selection-start="1100" selection-end="1100" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="915">
-          <folding>
-            <marker date="1383738524000" expanded="true" signature="120:1545" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/increasing.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="519" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/input1.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="891" column="1" selection-start="1984" selection-end="1984" vertical-scroll-proportion="0.06616257" vertical-offset="13330" max-vertical-offset="14145" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Machine.py">
@@ -471,7 +474,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Distributor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="11" selection-start="11" selection-end="11" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
+        <state line="7" column="12" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="891" column="1" selection-start="1984" selection-end="1984" vertical-scroll-proportion="0.0" vertical-offset="13330" max-vertical-offset="14145">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="0" selection-start="1098" selection-end="1098" vertical-scroll-proportion="0.52868855" vertical-offset="153" max-vertical-offset="885">
           <folding />
         </state>
       </provider>
