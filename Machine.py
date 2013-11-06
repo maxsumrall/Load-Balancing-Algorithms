@@ -8,7 +8,7 @@ class Machine:
         return str(self.makeSpan)
     def addJob(self,job):
         self.jobs.append(job)
-        self.makeSpan += int(job)
+        self.makeSpan += int(job.runTime)
     def getJobs(self):
         return self.jobs
     def getMakeSpan(self):

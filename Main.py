@@ -3,6 +3,7 @@ import MachineBoss
 import JobManager
 import GreedyScheduler
 import SortedGreedyScheduler
+import RandomScheduler
 
 def main():
     k=10
@@ -12,10 +13,9 @@ def main():
 
     for m in  range(15,16):
 
-        jobs = JobManager.JobManager(k,'input1.txt')
+        jobs = JobManager.JobManager(k,'input1.txt',m)
         machines = MachineBoss.MachineBoss(m)
         GreedyScheduler.GreedyScheduler(machines,jobs)
-        print jobs.maxJob
 
         makeSpan =  machines.maxMachine().makeSpan
         ratio = jobs.sumJobTime/float(m)
@@ -35,9 +35,9 @@ def main():
     bestR = 1
     for m in  range(15,16):
 
-        jobs = JobManager.JobManager(k,'input1.txt')
+        jobs = JobManager.JobManager(k,'input1.txt',m)
         machines = MachineBoss.MachineBoss(m)
-        SortedGreedyScheduler.SortedGreedyScheduler(machines,jobs)
+        RandomScheduler.RandomScheduler(machines,jobs)
 
 
         makeSpan =  machines.maxMachine().makeSpan
