@@ -17,18 +17,18 @@ class JobManager:
 			self.sumJobTime += float(self.jobs[i])
 		self.MAXJOB = Job.Job(0, self.numberOfMachines)
 
-	def __init__(self, kLookAhead, inputArray, numberOfMachines):
-		self.numberOfMachines = numberOfMachines
-		self.jobs = inputArray
-
-		self.lookAhead = kLookAhead
-		self.sumJobTime = 0.0
-
-		for i in range(len(self.jobs)):
-			self.jobs[i] = Job.Job(self.jobs[i], self.numberOfMachines)
-			self.sumJobTime += float(self.jobs[i])
-
-		self.MAXJOB = Job.Job(0, self.numberOfMachines)
+	# def __init__(self, kLookAhead, inputArray, numberOfMachines):
+	# 	self.numberOfMachines = numberOfMachines
+	# 	self.jobs = inputArray
+	#
+	# 	self.lookAhead = kLookAhead
+	# 	self.sumJobTime = 0.0
+	#
+	# 	for i in range(len(self.jobs)):
+	# 		self.jobs[i] = Job.Job(self.jobs[i], self.numberOfMachines)
+	# 		self.sumJobTime += float(self.jobs[i])
+	#
+	# 	self.MAXJOB = Job.Job(0, self.numberOfMachines)
 
 
 def __str__(self):

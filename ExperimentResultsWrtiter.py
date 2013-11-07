@@ -47,9 +47,16 @@ class ExperimentWriter:
 			elif Sorting == self.Sort_ReverseSorted:
 				Jobs.sort(reverse=True)
 
+			fileName="inputData"+str(j)+".txt";
+			tmpFile=open(fileName,'w')
+			for job in Jobs:
+				tmpFile.write(str(job)+"\n")
+
+			tmpFile.close()
+
 			#Select scheduler
 			Scheduler = None
-			Jobs = JobManager.JobManager(k, Jobs, m)
+			Jobs = JobManager.JobManager(k, fileName, m)
 			machines = MachineBoss.MachineBoss(m)
 
 			if Scheduler == self.Alg_SortedGreedy:
