@@ -16,7 +16,7 @@ class RandomScheduler:
             #print "Current is "
             #print machines.machines
             #print str(machines)
-            for i in range(0,len(machines.machines)*1000):
+            for i in range(0,len(machines.machines)*1):
                 fakeMachines=[]
                 for m in machines.machines:
                     fakeMachines.append(m.makeSpan)

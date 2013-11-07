@@ -14,7 +14,7 @@ def main():
     bestS = 100000000000
     bestR = 0
 
-    for m in  range(15,16):
+    for m in  range(20,21):
 
         jobs = JobManager.JobManager(k,'input1.txt',m)
         machines = MachineBoss.MachineBoss(m)
@@ -36,7 +36,7 @@ def main():
     bestM = 1
     bestS = 100000000000
     bestR = 1
-    for m in  range(15,16):
+    for m in  range(20,21):
 
         jobs = JobManager.JobManager(k,'input1.txt',m)
         machines = MachineBoss.MachineBoss(m)

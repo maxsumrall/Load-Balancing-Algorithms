@@ -27,41 +27,52 @@ class HillClimbingScheduling:
             candidateAssignment = [0,[]] #holds an int ofr each job where the int represents which machine to assign the job
             virtualAssignment = self.makeVirtualStateCopy()
 
-            tcount = 0
             ithindex = 0
             for each in sortedJobs:
                 minIndex = virtualAssignment.index(min(virtualAssignment))
-                if (each.runTime == job[0].runTime) and (candidateAssignment[0] == 0): #we've found the i-th job
-                    candidateAssignment[0] = minIndex
-                    ithindex = tcount
-
-                else:
+                if (each.runTime > job[0].runTime):
                     candidateAssignment[1].append(minIndex)
-                tcount+=1
-                virtualAssignment[minIndex] += each.runTime
+                    virtualAssignment[minIndex] += each.runTime
+                    ithindex+=1
+
+            sortedJobs = sortedJobs[0:ithindex] + sortedJobs[ithindex+1:]
+            minIndex = virtualAssignment.index(min(virtualAssignment))
+            candidateAssignment[0] = minIndex
+            virtualAssignment[minIndex] += job[0].runTime
+
+            for each in sortedJobs:
+                minIndex = virtualAssignment.index(min(virtualAssignment))
+                if (each.runTime < job[0].runTime):
+                    candidateAssignment[1].append(minIndex)
+                    virtualAssignment[minIndex] += each.runTime
+
 
 
             #We've made candidateAssignment represent the sortedGreedy assignment of the variable sortedJobs
-            sortedJobs = sortedJobs[0:ithindex] + sortedJobs[ithindex+1:]
-
-            #virtualAssignment[candidateAssignment[0]] += job[0].runTime
-            #for i in range(len(candidateAssignment[1])):
-            #    virtualAssignment[candidateAssignment[1][i]] += sortedJobs[i]
 
             if(kNumberOfJobs > 0):
-                for iteration in range(1000):
+                for iteration in range(0):
                     secondCandidate = [0,[]]
-                    secondCandidate[0] = candidateAssignment[0]
-                    for each in range(len(candidateAssignment[1])):
-                        secondCandidate[1].append(candidateAssignment[1][each])
-                    if secondCandidate[1] == []:
-                        secondCandidate[1] = [0]
-                    swapIndex1 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
-                    swapIndex2 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
+                    #secondCandidate[0] = candidateAssignment[0]
+                    #for each in range(len(candidateAssignment[1])):
+                    #    secondCandidate[1].append(candidateAssignment[1][each])
+                    #if secondCandidate[1] == []:
+                    #    secondCandidate[1] = [0]
 
-                    intermediary = secondCandidate[1][swapIndex1]
-                    secondCandidate[1][swapIndex1] = secondCandidate[1][swapIndex2]
-                    secondCandidate[1][swapIndex2] = intermediary
+                    #swapIndex1 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
+                    #swapIndex2 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
+
+                    #intermediary = secondCandidate[1][swapIndex1]
+                    #secondCandidate[1][swapIndex1] = secondCandidate[1][swapIndex2]
+                    #secondCandidate[1][swapIndex2] = intermediary
+
+                    #print len(candidateAssignment[1]), len(secondCandidate[1])
+
+                    secondCandidate[0] = int(math.floor(random.uniform(0,len(self.machines.machines))))
+                    for each in range(len(candidateAssignment[1])):
+                        secondCandidate[1].append(int(math.floor(random.uniform(0,len(self.machines.machines)))))
+
+
 
                     secondVirtualCopy = self.makeVirtualStateCopy()
 
@@ -71,7 +82,7 @@ class HillClimbingScheduling:
                         secondVirtualCopy[secondCandidate[1][each]] += sortedJobs[each]
 
                     if max(secondVirtualCopy) < max(virtualAssignment):#new is better
-                        print "hill climbing worked!" + str(max(secondVirtualCopy)) + " vs " + str(max(virtualAssignment))
+                        #print "hill climbing worked!" + str(max(secondVirtualCopy)) + " vs " + str(max(virtualAssignment))
                         candidateAssignment[0] = secondCandidate[0]
                         for each in range(len(candidateAssignment[1])):
                             candidateAssignment[1][each] = secondCandidate[1][each]
