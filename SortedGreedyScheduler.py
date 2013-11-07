@@ -13,8 +13,8 @@ class SortedGreedyScheduler:
                 fakeMachines.append(m.makeSpan)
             #order of makespans in fakeMachines corresponds to order of machines in self.machines
             #Now, add the k-jobs larger than our current i-job to our fake machines to determine where our i-job will really go
-            kJobs = (sorted(job[1])[0])
-            kJobs.reverse()
+            kJobs = (sorted(job[1]))
+            #kJobs.reverse()
             #print kJobs
             #print job[0]
             for kjob in kJobs:

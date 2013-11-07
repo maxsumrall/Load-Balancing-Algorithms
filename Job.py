@@ -15,8 +15,7 @@ class Job():
         return self.runTime
     def __iter__(self):
         return self.runTime
-    def __int__(self):
-        return int(self.runTime)
+
     def __float__(self):
         return float(self.runTime)
     def __add__(self, other):
