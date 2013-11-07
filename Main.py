@@ -6,6 +6,7 @@ import SortedGreedyScheduler
 import RandomScheduler
 import RandomSearch
 import RandomSearchStatistics
+import HillClimbingScheduling
 
 def main():
     k=50
@@ -39,7 +40,7 @@ def main():
 
         jobs = JobManager.JobManager(k,'input1.txt',m)
         machines = MachineBoss.MachineBoss(m)
-        GreedyScheduler.GreedyScheduler(machines,jobs)
+        HillClimbingScheduling.HillClimbingScheduling(machines,jobs)
 
 
         makeSpan =  machines.maxMachine().makeSpan
