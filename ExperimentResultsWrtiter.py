@@ -85,5 +85,5 @@ class ExperimentWriter:
 
 
 Ex = ExperimentWriter()
-Ex.WriteExperiment(ExperimentWriter.Alg_SortedGreedy, ExperimentWriter.Distr_Pareto,
+Ex.WriteExperiment(ExperimentWriter.Alg_Random, ExperimentWriter.Distr_Pareto,
                    ExperimentWriter.Sort_ReverseSorted, 3, 6)
