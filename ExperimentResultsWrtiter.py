@@ -21,41 +21,52 @@ class ExperimentWriter:
 	Sort_ReverseSorted = 2
 	Sortings = [Sort_Sorted, Sort_Random, Sort_ReverseSorted]
 
-	def WriteExperiment(self, Algorithm, Distribution, Sorting, k, m, JobsSizes=range(10, 1000)):
-		#Check input data
-		if not (Algorithm in self.Algorithms):
-			raise ValueError("Please choose one of algorithms from ExperimentWriter class")
 
+	def generateInputFiles(self,Distribution, Sorting,JobsSizes=range(10, 1000)):
 		if not (Distribution in self.Distributions):
 			raise ValueError("Please choose one of distributions from ExperimentWriter class")
 
 		if not (Sorting in self.Sortings):
 			raise ValueError("Please choose one of sortings from ExperimentWriter class")
-
-		Results = []
-		#Generate jobs sets
+		FileNames=[]
 		for j in JobsSizes:
 			Jobs = []
+			D=""
+			S=""
 			if Distribution == self.Distr_Normal:
 				Jobs = DistributionGenerator.getGauss(j, 5)
+				D="Normal distribution "
 			elif Distribution == self.Distr_Pareto:
 				Jobs = DistributionGenerator.getPareto(j)
+				D="Pareto distribution "
 
 			#Sort input set
 			if Sorting == self.Sort_Sorted:
 				Jobs.sort()
+				S="sorted smallest to largest"
 			elif Sorting == self.Sort_ReverseSorted:
 				Jobs.sort(reverse=True)
+				S="sorted largest to smallest"
 
 			fileName="inputData"+str(j)+".txt";
 			tmpFile=open(fileName,'w')
+			tmpFile.write(D+S+"\n")
 			for job in Jobs:
 				tmpFile.write(str(job)+"\n")
 
 			tmpFile.close()
+			FileNames+=[fileName]
+		return FileNames
 
-			#Select scheduler
-			Scheduler = None
+	def WriteExperiment(self, Algorithm, k, m,inputFileNames,outputFileName):
+		#Check input data
+		if not (Algorithm in self.Algorithms):
+			raise ValueError("Please choose one of algorithms from ExperimentWriter class")
+
+		Results = []
+		#Select scheduler
+		Scheduler = None
+		for fileName in inputFileNames:
 			Jobs = JobManager.JobManager(k, fileName, m)
 			machines = MachineBoss.MachineBoss(m)
 
@@ -67,6 +78,7 @@ class ExperimentWriter:
 
 			makeSpan = machines.maxMachine().makeSpan
 			ratio = Jobs.sumJobTime / float(m)
+			j=len(Jobs.jobs)
 			bestS, bestM = "", ""
 
 			ResultsRow = []
@@ -78,7 +90,7 @@ class ExperimentWriter:
 			ResultsRow += [""]
 			Results += [ResultsRow]
 
-		self.writeResultsToCSV("TryMe.csv", Results)
+		self.writeResultsToCSV(outputFileName, Results)
 
 
 	def writeResultsToCSV(self, filename, resultsTable):
@@ -92,5 +104,5 @@ class ExperimentWriter:
 
 
 Ex = ExperimentWriter()
-Ex.WriteExperiment(ExperimentWriter.Alg_SortedGreedy, ExperimentWriter.Distr_Pareto,
-                   ExperimentWriter.Sort_ReverseSorted, 3, 6)
+inputFiles=Ex.generateInputFiles(ExperimentWriter.Distr_Pareto, ExperimentWriter.Sort_ReverseSorted)
+Ex.WriteExperiment(ExperimentWriter.Alg_SortedGreedy, 3, 6,inputFiles,"tryMe.csv")
