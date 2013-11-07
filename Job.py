@@ -7,6 +7,7 @@ class Job():
         for i in range(numberOfMachines):
             self.assignedMachines.append(0)
         self.runTime = runtime
+        self.numberOfMachiens = numberOfMachines
 
     def __str__(self):
         return str(self.runTime)
@@ -37,3 +38,6 @@ class Job():
 
     def highestVotedIndex(self):
         return self.assignedMachines.index((max(self.assignedMachines)))
+
+    def getCopy(self):
+        return Job(self.runTime,self.numberOfMachiens)

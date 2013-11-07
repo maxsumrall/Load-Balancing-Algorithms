@@ -10,74 +10,92 @@ class HillClimbingScheduling:
         self.bestMakeSpan = 100**10
         self.bestAssignment = [0,[]]
 
-        #initilize fakemachines to represent the current state
-        fakeMachines = []
-        for m in machines.machines:
-            fakeMachines.append(m.makeSpan)
-        #do sorted-greedy
-        for job in jobs:
+        for job in self.jobs:
+
+            #1. Do Sorted Greedy to find a good solution
+            #2. Do hill-climbing on our good solution to find a better solution
+
             kNumberOfJobs = len(job[1])
-
-            kJobs = (sorted(job[1])[0])
-            kJobs.reverse()
-            for kjob in kJobs:
-                if(kjob > job[0]):
-                    minIndex = fakeMachines.index(min(fakeMachines))
-                    fakeMachines[minIndex] += float(kjob)
-            #added kjobs > i-job
-            fakeMachines[fakeMachines.index(min(fakeMachines))] += job[0]
+            sortedJobsBackwards = sorted(job[1]+[job[0]])
+            sortedJobs = []
+            #reverse jobs
+            for i in sortedJobsBackwards[::-1]:
+                sortedJobs.append(i)
+            #
 
 
-            for trials in range(1000):
-                candidateAssignment = [0,[]] #holds an int ofr each job where the int represents which machine to assign the job
-                candidateAssignment[0] = int(math.floor(random.uniform(0,self.machines.numberOfMachines))) #i-th element assignment
+            candidateAssignment = [0,[]] #holds an int ofr each job where the int represents which machine to assign the job
+            virtualAssignment = self.makeVirtualStateCopy()
+
+            tcount = 0
+            ithindex = 0
+            for each in sortedJobs:
+                minIndex = virtualAssignment.index(min(virtualAssignment))
+                if (each.runTime == job[0].runTime) and (candidateAssignment[0] == 0): #we've found the i-th job
+                    candidateAssignment[0] = minIndex
+                    ithindex = tcount
+
+                else:
+                    candidateAssignment[1].append(minIndex)
+                tcount+=1
+                virtualAssignment[minIndex] += each.runTime
+
+
+            #We've made candidateAssignment represent the sortedGreedy assignment of the variable sortedJobs
+            sortedJobs = sortedJobs[0:ithindex] + sortedJobs[ithindex+1:]
+
+            #virtualAssignment[candidateAssignment[0]] += job[0].runTime
+            #for i in range(len(candidateAssignment[1])):
+            #    virtualAssignment[candidateAssignment[1][i]] += sortedJobs[i]
+
+            if(kNumberOfJobs > 0):
+                for iteration in range(1000):
+                    secondCandidate = [0,[]]
+                    secondCandidate[0] = candidateAssignment[0]
+                    for each in range(len(candidateAssignment[1])):
+                        secondCandidate[1].append(candidateAssignment[1][each])
+                    if secondCandidate[1] == []:
+                        secondCandidate[1] = [0]
+                    swapIndex1 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
+                    swapIndex2 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
+
+                    intermediary = secondCandidate[1][swapIndex1]
+                    secondCandidate[1][swapIndex1] = secondCandidate[1][swapIndex2]
+                    secondCandidate[1][swapIndex2] = intermediary
+
+                    secondVirtualCopy = self.makeVirtualStateCopy()
+
+                    secondVirtualCopy[secondCandidate[0]] += job[0]
+
+                    for each in range(len(secondCandidate[1])):
+                        secondVirtualCopy[secondCandidate[1][each]] += sortedJobs[each]
+
+                    if max(secondVirtualCopy) < max(virtualAssignment):#new is better
+                        print "hill climbing worked!" + str(max(secondVirtualCopy)) + " vs " + str(max(virtualAssignment))
+                        candidateAssignment[0] = secondCandidate[0]
+                        for each in range(len(candidateAssignment[1])):
+                            candidateAssignment[1][each] = secondCandidate[1][each]
+
+
+            #candidateassignemtn should be the best of greedysorted plus the hill climbing
+            self.machines.machines[candidateAssignment[0]].addJob(job[0])
+            #for i in range(len(candidateAssignment[1])):
+            #    self.machines.machines[candidateAssignment[i]] = sortedJobs[i]
 
 
 
-                for i in range(kNumberOfJobs):
-                    randIndex = int(math.floor(random.uniform(0,self.machines.numberOfMachines)))
-                    candidateAssignment[1].append(randIndex) #k element assignments
-                #we've computed a random assignment and stored it in candidateAssignment
-
-                fakeMachines[candidateAssignment[0]] += job[0]
-                for i in range(kNumberOfJobs):
-                    fakeMachines[candidateAssignment[1][i]] += job[1][i]
-
-                if max(fakeMachines) < self.bestMakeSpan:
-                    self.bestMakeSpan = max(fakeMachines)
-                    self.bestAssignment = candidateAssignment
-
-            #Found best assignemnt out of n-trials
-
-            #have the best assignment be voted for in each job
-            job[0].addVoteForIndex(candidateAssignment[0])
-            for i in range(kNumberOfJobs):
-                job[1][i].addVoteForIndex(candidateAssignment[1][i])
 
 
-            #assign job i to its highest voted machine
-            self.machines.machines[job[0].highestVotedIndex()].addJob(job[0])
 
 
-        for job in jobs:
-            #make new array of numbers, corresponding to size of machines workload ----fake machines------
-            fakeMachines = []
-            for m in machines.machines:
-                fakeMachines.append(m.makeSpan)
-            #order of makespans in fakeMachines corresponds to order of machines in self.machines
-            #Now, add the k-jobs larger than our current i-job to our fake machines to determine where our i-job will really go
-            kJobs = (sorted(job[1])[0])
-            kJobs.reverse()
-            #print kJobs
-            #print job[0]
-            for kjob in kJobs:
-                if(kjob > job[0]):
-                    minIndex = fakeMachines.index(min(fakeMachines))
-                    fakeMachines[minIndex] += float(kjob)
-            #        print "Job " + str(kjob) + " assigned to machine " + str(minIndex+1)
-            #now all the bigger jobs are assigned to the correct machine.
-            #we will get the index of the current min machine in a fake setup and assign the i-job to that machine IRL
-            sortedGreedyIndex = fakeMachines.index(min(fakeMachines))
-            self.machines.machines[sortedGreedyIndex].addJob(job[0])
-            #print "ith job assigned to : " +str(sortedGreedyIndex+1)
-            #print machines
+
+
+
+
+
+
+    def makeVirtualStateCopy(self):
+        va = []
+        for m in self.machines.machines:
+            va.append(m.getMakeSpan())
+        return va
