@@ -1,4 +1,4 @@
-__author__ = 'max'
+__author__ = 'natalia'
 import MachineBoss
 import random
 import time
@@ -19,7 +19,7 @@ class RandomScheduler:
             kJobs = (job[1][0])
             makesSpan=machines.maxMachine().getMakeSpan()+sum(kJobs)
             bestIndex=1
-            for i in range(0,10):
+            for i in range(0,2000):
                 f_index = random.randint(0,len(machines.machines)-1)
                 fakeMachines[f_index] += job[0]
                 for kjob in kJobs:

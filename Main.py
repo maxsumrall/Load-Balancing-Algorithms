@@ -4,9 +4,11 @@ import JobManager
 import GreedyScheduler
 import SortedGreedyScheduler
 import RandomScheduler
+import RandomSearch
+import RandomSearchStatistics
 
 def main():
-    k=10
+    k=50
     bestM = 1
     bestS = 100000000000
     bestR = 0
@@ -37,7 +39,7 @@ def main():
 
         jobs = JobManager.JobManager(k,'input1.txt',m)
         machines = MachineBoss.MachineBoss(m)
-        RandomScheduler.RandomScheduler(machines,jobs)
+        RandomSearchStatistics.RandomSearchStatistics(machines,jobs)
 
 
         makeSpan =  machines.maxMachine().makeSpan
@@ -50,9 +52,10 @@ def main():
             bestR = ratio
         #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
         #print "ratio: " + str(makeSpan/ratio)
-    print "Best: m= "+ str(bestM) + " SortedGreedy makespan: " + str(bestS) + " OPT: " + str(bestR)
+    print "Best: m= "+ str(bestM) + " Random makespan: " + str(bestS) + " OPT: " + str(bestR)
 
-
+    for each in jobs.jobs:
+        print each.assignedMachines
 
 
 

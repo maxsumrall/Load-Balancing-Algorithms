@@ -30,7 +30,7 @@ class JobManager:
             work.append(self.jobs[i])
             futureWork.append(self.jobs[i+1:i+1+self.lookAhead])
 
-            yield work[0],futureWork
+            yield work[0],futureWork[0]
 
     def __getitem__(self, item):
         return int(self.jobs[item])

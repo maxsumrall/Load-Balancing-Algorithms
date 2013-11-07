@@ -32,3 +32,9 @@ class Job():
         return result
     def __getattribute__(self, item):
         return self.runTime.index(item)
+
+    def addVoteForIndex(self, votedIndex):
+        self.assignedMachines[votedIndex] += 1
+
+    def highestVotedIndex(self):
+        return self.assignedMachines.index((max(self.assignedMachines)))
