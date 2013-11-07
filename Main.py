@@ -17,7 +17,7 @@ def main():
 
         jobs = JobManager.JobManager(k,'input1.txt',m)
         machines = MachineBoss.MachineBoss(m)
-        GreedyScheduler.GreedyScheduler(machines,jobs)
+        SortedGreedyScheduler.SortedGreedyScheduler(machines,jobs)
 
         makeSpan =  machines.maxMachine().makeSpan
         ratio = jobs.sumJobTime/float(m)
@@ -39,7 +39,7 @@ def main():
 
         jobs = JobManager.JobManager(k,'input1.txt',m)
         machines = MachineBoss.MachineBoss(m)
-        RandomSearchStatistics.RandomSearchStatistics(machines,jobs)
+        GreedyScheduler.GreedyScheduler(machines,jobs)
 
 
         makeSpan =  machines.maxMachine().makeSpan
@@ -53,9 +53,6 @@ def main():
         #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
         #print "ratio: " + str(makeSpan/ratio)
     print "Best: m= "+ str(bestM) + " Random makespan: " + str(bestS) + " OPT: " + str(bestR)
-
-    for each in jobs.jobs:
-        print each.assignedMachines
 
 
 
