@@ -51,12 +51,12 @@ class HillClimbingScheduling:
             #We've made candidateAssignment represent the sortedGreedy assignment of the variable sortedJobs
 
             if(kNumberOfJobs > 0):
-                for iteration in range(100):
+                for iteration in range(len(self.machines.machines)*100):
 
                     secondCandidate = [0,[]]
                     secondVirtualCopy = self.makeVirtualStateCopy()
-                    hillClimb = False
-                    randomSearch = True
+                    hillClimb = True
+                    randomSearch = False
 
 
                     if hillClimb:
