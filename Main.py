@@ -10,31 +10,28 @@ import HillClimbingScheduling
 import LeaveRoomSortedGreedy
 
 def main():
-    k=10
+    files = ["normal.txt","input1.txt",'normal-3-1.txt','normal-6-2.txt,''normal-100-30.txt']
+    machines = 20
+    kLookAhead = 10
+    writeIO = open('runTimes.txt','w')
+    writeIO.write("M = " + str(machines) + "K = " + str(kLookAhead) + "\n")
+    for inputFile in files:
+        simpleTest(writeIO,inputFile,machines,kLookAhead)
+
+
+
+
+
+def simpleTest(writeFile,inputFile,m,k):
+
     bestM = 1
     bestS = 100000000000
     bestR = 0
-    inputFile = "input1.txt"
 
-    for m in  range(20,21):
 
-        jobs = JobManager.JobManager(k,inputFile,m)
-        machines = MachineBoss.MachineBoss(m)
-        GreedyScheduler.GreedyScheduler(machines,jobs)
 
-        makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/float(m)
-        bestS,bestM = "",""
-        if makeSpan < bestS:
-            bestS = makeSpan
-            bestM = m
-            bestR = ratio
 
-        #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
-        #print "ratio: " + str(makeSpan/ratio)
-    print "Greedy: " + str(bestS) + " OPT: " + str(bestR)
-
-    for m in  range(20,21):
+    for m in  range(m,m+1):
 
         jobs = JobManager.JobManager(k,inputFile,m)
         machines = MachineBoss.MachineBoss(m)
@@ -48,21 +45,45 @@ def main():
             bestM = m
             bestR = ratio
 
-        #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
-        #print "ratio: " + str(makeSpan/ratio)
-    print "Sorted Greedy: " + str(bestS)
+    writeFile.write(" OPT: " + str(bestR))
+
+    writeFile.write("Sorted Greedy: \t\t" + str(bestS))
 
 
-    ###########
+    for i in range(100):
+        bestM = 1
+        bestS = 100000000000
+        bestR = 1
+        for m in  range(m,m+1):
+
+            jobs = JobManager.JobManager(k,inputFile,m)
+            machines = MachineBoss.MachineBoss(m)
+            RandomScheduler.RandomScheduler(machines,jobs)
+
+
+            makeSpan =  machines.maxMachine().makeSpan
+            ratio = jobs.sumJobTime/float(m)
+            LB = max(max(jobs.jobs),ratio)
+            bestS,bestM = "",""
+            if makeSpan < bestS:
+                bestS = makeSpan
+                bestM = m
+                bestR = ratio
+            #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
+            #print "ratio: " + str(makeSpan/ratio)
+
+    writeFile.write("RandomScheduler: \t " + str(bestS))
 
     bestM = 1
     bestS = 100000000000
     bestR = 1
-    for m in  range(20,21):
+    for m in  range(m,m+1):
 
         jobs = JobManager.JobManager(k,inputFile,m)
         machines = MachineBoss.MachineBoss(m)
-        LeaveRoomSortedGreedy.LeaveRoomSortedGreedy(machines,jobs)
+        RandomSearch.RandomSearch(machines,jobs)
+
+
         makeSpan =  machines.maxMachine().makeSpan
         ratio = jobs.sumJobTime/float(m)
         LB = max(max(jobs.jobs),ratio)
@@ -71,39 +92,16 @@ def main():
             bestS = makeSpan
             bestM = m
             bestR = ratio
-        print "Leave Room - Sorted Greedy: " + str(bestS)
-
-
-
-#####
-
-    bestM = 1
-    bestS = 100000000000
-    bestR = 1
-    for m in  range(20,21):
-
-        jobs = JobManager.JobManager(k,inputFile,m)
-        machines = MachineBoss.MachineBoss(m)
-        HillClimbingScheduling.HillClimbingScheduling(machines,jobs)
-
-
-        makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/float(m)
-        LB = max(max(jobs.jobs),ratio)
-        bestS,bestM = "",""
-        if makeSpan < bestS:
-            bestS = makeSpan
-            bestM = m
-            bestR = ratio
         #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
         #print "ratio: " + str(makeSpan/ratio)
-    print "HillClimbing:  " + str(bestS)
+
+    print "Random Search: \t\t " + str(bestS)
 
 
     bestM = 1
     bestS = 100000000000
     bestR = 1
-    for m in  range(20,21):
+    for m in  range(m,m+1):
 
         jobs = JobManager.JobManager(k,inputFile,m)
         machines = MachineBoss.MachineBoss(m)
@@ -122,55 +120,6 @@ def main():
         #print "ratio: " + str(makeSpan/ratio)
 
     print "RandomSearchStatistics:  " + str(bestS)
-
-
-    bestM = 1
-    bestS = 100000000000
-    bestR = 1
-    for m in  range(20,21):
-
-        jobs = JobManager.JobManager(k,inputFile,m)
-        machines = MachineBoss.MachineBoss(m)
-        RandomScheduler.RandomScheduler(machines,jobs)
-
-
-        makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/float(m)
-        LB = max(max(jobs.jobs),ratio)
-        bestS,bestM = "",""
-        if makeSpan < bestS:
-            bestS = makeSpan
-            bestM = m
-            bestR = ratio
-        #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
-        #print "ratio: " + str(makeSpan/ratio)
-
-    print "RandomScheduler:  " + str(bestS)
-
-    bestM = 1
-    bestS = 100000000000
-    bestR = 1
-    for m in  range(20,21):
-
-        jobs = JobManager.JobManager(k,inputFile,m)
-        machines = MachineBoss.MachineBoss(m)
-        RandomSearch.RandomSearch(machines,jobs)
-
-
-        makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/float(m)
-        LB = max(max(jobs.jobs),ratio)
-        bestS,bestM = "",""
-        if makeSpan < bestS:
-            bestS = makeSpan
-            bestM = m
-            bestR = ratio
-        #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
-        #print "ratio: " + str(makeSpan/ratio)
-
-    print "Random Search:  " + str(bestS)
-
-
 
 
 main()
