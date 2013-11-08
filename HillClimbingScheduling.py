@@ -51,38 +51,43 @@ class HillClimbingScheduling:
             #We've made candidateAssignment represent the sortedGreedy assignment of the variable sortedJobs
 
             if(kNumberOfJobs > 0):
-                for iteration in range(0):
+                for iteration in range(100):
+
                     secondCandidate = [0,[]]
-                    #secondCandidate[0] = candidateAssignment[0]
-                    #for each in range(len(candidateAssignment[1])):
-                    #    secondCandidate[1].append(candidateAssignment[1][each])
-                    #if secondCandidate[1] == []:
-                    #    secondCandidate[1] = [0]
-
-                    #swapIndex1 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
-                    #swapIndex2 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
-
-                    #intermediary = secondCandidate[1][swapIndex1]
-                    #secondCandidate[1][swapIndex1] = secondCandidate[1][swapIndex2]
-                    #secondCandidate[1][swapIndex2] = intermediary
-
-                    #print len(candidateAssignment[1]), len(secondCandidate[1])
-
-                    secondCandidate[0] = int(math.floor(random.uniform(0,len(self.machines.machines))))
-                    for each in range(len(candidateAssignment[1])):
-                        secondCandidate[1].append(int(math.floor(random.uniform(0,len(self.machines.machines)))))
-
-
-
                     secondVirtualCopy = self.makeVirtualStateCopy()
+                    hillClimb = False
+                    randomSearch = True
 
-                    secondVirtualCopy[secondCandidate[0]] += job[0]
 
+                    if hillClimb:
+                        secondCandidate[0] = candidateAssignment[0]
+                        for each in range(len(candidateAssignment[1])):
+                            secondCandidate[1].append(candidateAssignment[1][each])
+                        if secondCandidate[1] == []:
+                            secondCandidate[1] = [0]
+
+                        swapIndex1 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
+                        swapIndex2 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
+
+                        intermediary = secondCandidate[1][swapIndex1]
+                        secondCandidate[1][swapIndex1] = secondCandidate[1][swapIndex2]
+                        secondCandidate[1][swapIndex2] = intermediary
+
+                    elif randomSearch:
+                        secondCandidate[0] = int(math.floor(random.uniform(0,len(self.machines.machines))))
+                        for each in range(len(candidateAssignment[1])):
+                            secondCandidate[1].append(int(math.floor(random.uniform(0,len(self.machines.machines)))))
+
+                    secondVirtualCopy[secondCandidate[0]] += job[0].runTime
                     for each in range(len(secondCandidate[1])):
-                        secondVirtualCopy[secondCandidate[1][each]] += sortedJobs[each]
+                        secondVirtualCopy[secondCandidate[1][each]] += sortedJobs[each].runTime
 
                     if max(secondVirtualCopy) < max(virtualAssignment):#new is better
-                        #print "hill climbing worked!" + str(max(secondVirtualCopy)) + " vs " + str(max(virtualAssignment))
+                       # print "hill climbing worked!" + str(max(secondVirtualCopy)) + " vs " + str(max(virtualAssignment))
+                       # print swapIndex1, swapIndex2
+                       # for each in range(len(secondCandidate[1])):
+                       #     print str(secondCandidate[1][each]) + " : " + str(candidateAssignment[1][each])
+                       # raw_input()
                         candidateAssignment[0] = secondCandidate[0]
                         for each in range(len(candidateAssignment[1])):
                             candidateAssignment[1][each] = secondCandidate[1][each]

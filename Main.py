@@ -9,7 +9,7 @@ import RandomSearchStatistics
 import HillClimbingScheduling
 
 def main():
-    k=50
+    k=10
     bestM = 1
     bestS = 100000000000
     bestR = 0
@@ -30,7 +30,7 @@ def main():
 
         #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
         #print "ratio: " + str(makeSpan/ratio)
-    print "Best: m= "+ str(bestM) + " Greedy makespan: " + str(bestS) + " ratio: " + str(bestR)
+    print "Sorted Greedy: " + str(bestS) + " OPT: " + str(bestR)
 
 
     bestM = 1
@@ -53,7 +53,7 @@ def main():
             bestR = ratio
         #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
         #print "ratio: " + str(makeSpan/ratio)
-    print "Best: m= "+ str(bestM) + " Random makespan: " + str(bestS) + " OPT: " + str(bestR)
+    print "HillClimbing:  " + str(bestS)
 
 
 
