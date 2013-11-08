@@ -25,7 +25,7 @@ class RandomScheduler:
                 for kjob in kJobs:
                         index = random.randint(0,len(machines.machines)-1)
                         fakeMachines[index] += float(kjob)
-                        if(max(fakeMachines) < makesSpan):
+                        if(max(fakeMachines) >  makesSpan):
                             break
                 #print fakeMachines
                 if(max(fakeMachines) < makesSpan):

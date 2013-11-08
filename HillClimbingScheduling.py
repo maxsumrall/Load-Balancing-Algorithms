@@ -7,14 +7,14 @@ class HillClimbingScheduling:
     def __init__(self,machines,jobs):
         self.machines = machines
         self.jobs = jobs
-        self.bestMakeSpan = 100**10
-        self.bestAssignment = [0,[]]
 
         for job in self.jobs:
 
             #1. Do Sorted Greedy to find a good solution
             #2. Do hill-climbing on our good solution to find a better solution
 
+            self.bestAssignment = [0,[]]
+            self.bestMakeSpan = 100**10
             kNumberOfJobs = len(job[1])
             sortedJobsBackwards = sorted(job[1]+[job[0]])
             sortedJobs = []
@@ -24,27 +24,26 @@ class HillClimbingScheduling:
             #
 
 
-            candidateAssignment = [0,[]] #holds an int ofr each job where the int represents which machine to assign the job
-            virtualAssignment = self.makeVirtualStateCopy()
+            virtualMachineState = self.makeVirtualStateCopy()
 
             ithindex = 0
             for each in sortedJobs:
-                minIndex = virtualAssignment.index(min(virtualAssignment))
+                minIndex = virtualMachineState.index(min(virtualMachineState))
                 if (each.runTime > job[0].runTime):
-                    candidateAssignment[1].append(minIndex)
-                    virtualAssignment[minIndex] += each.runTime
+                    self.bestAssignment[1].append(int(minIndex))
+                    virtualMachineState[minIndex] += int(each.runTime)
                     ithindex+=1
 
             sortedJobs = sortedJobs[0:ithindex] + sortedJobs[ithindex+1:]
-            minIndex = virtualAssignment.index(min(virtualAssignment))
-            candidateAssignment[0] = minIndex
-            virtualAssignment[minIndex] += job[0].runTime
+            minIndex = virtualMachineState.index(min(virtualMachineState))
+            self.bestAssignment[0] = int(minIndex)
+            virtualMachineState[minIndex] += int(job[0].runTime)
 
             for each in sortedJobs:
-                minIndex = virtualAssignment.index(min(virtualAssignment))
+                minIndex = virtualMachineState.index(min(virtualMachineState))
                 if (each.runTime < job[0].runTime):
-                    candidateAssignment[1].append(minIndex)
-                    virtualAssignment[minIndex] += each.runTime
+                    self.bestAssignment[1].append(int(minIndex))
+                    virtualMachineState[minIndex] += int(each.runTime)
 
 
 
@@ -53,48 +52,42 @@ class HillClimbingScheduling:
             if(kNumberOfJobs > 0):
                 for iteration in range(len(self.machines.machines)*100):
 
-                    secondCandidate = [0,[]]
+                    secondCandidate = list(self.bestAssignment)
                     secondVirtualCopy = self.makeVirtualStateCopy()
                     hillClimb = True
-                    randomSearch = False
-
+                    randomSearch = True
 
                     if hillClimb:
-                        secondCandidate[0] = candidateAssignment[0]
-                        for each in range(len(candidateAssignment[1])):
-                            secondCandidate[1].append(candidateAssignment[1][each])
-                        if secondCandidate[1] == []:
-                            secondCandidate[1] = [0]
+                        secondCandidate = list(self.bestAssignment)
 
-                        swapIndex1 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
-                        swapIndex2 = int(math.floor(random.uniform(0,len(secondCandidate[1]))))
+                        swapIndex1 = random.randint(0,len(secondCandidate[1])-1)
+                        swapIndex2 = random.randint(0,len(secondCandidate[1])-1)
 
-                        intermediary = secondCandidate[1][swapIndex1]
-                        secondCandidate[1][swapIndex1] = secondCandidate[1][swapIndex2]
-                        secondCandidate[1][swapIndex2] = intermediary
+                        intermediary = int(secondCandidate[1][swapIndex1])
+                        secondCandidate[1][swapIndex1] = int(secondCandidate[1][swapIndex2])
+                        secondCandidate[1][swapIndex2] = int(intermediary)
 
+########################################
                     elif randomSearch:
                         secondCandidate[0] = int(math.floor(random.uniform(0,len(self.machines.machines))))
-                        for each in range(len(candidateAssignment[1])):
+                        for each in range(len(secondCandidate[1])):
                             secondCandidate[1].append(int(math.floor(random.uniform(0,len(self.machines.machines)))))
-
-                    secondVirtualCopy[secondCandidate[0]] += job[0].runTime
+########################################
+                    secondVirtualCopy[secondCandidate[0]] += int(job[0].runTime)
                     for each in range(len(secondCandidate[1])):
-                        secondVirtualCopy[secondCandidate[1][each]] += sortedJobs[each].runTime
+                        secondVirtualCopy[secondCandidate[1][each]] += int(sortedJobs[each].runTime)
 
-                    if max(secondVirtualCopy) < max(virtualAssignment):#new is better
+                    if max(secondVirtualCopy) < max(virtualMachineState):#new is better
                        # print "hill climbing worked!" + str(max(secondVirtualCopy)) + " vs " + str(max(virtualAssignment))
                        # print swapIndex1, swapIndex2
                        # for each in range(len(secondCandidate[1])):
                        #     print str(secondCandidate[1][each]) + " : " + str(candidateAssignment[1][each])
                        # raw_input()
-                        candidateAssignment[0] = secondCandidate[0]
-                        for each in range(len(candidateAssignment[1])):
-                            candidateAssignment[1][each] = secondCandidate[1][each]
+                        self.bestAssignment = list(secondCandidate)
 
 
             #candidateassignemtn should be the best of greedysorted plus the hill climbing
-            self.machines.machines[candidateAssignment[0]].addJob(job[0])
+            self.machines.machines[self.bestAssignment[0]].addJob(job[0])
             #for i in range(len(candidateAssignment[1])):
             #    self.machines.machines[candidateAssignment[i]] = sortedJobs[i]
 

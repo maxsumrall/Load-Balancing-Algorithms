@@ -7,12 +7,12 @@ class RandomSearchStatistics:
     def __init__(self,machines,jobs):
         self.machines = machines
         self.jobs = jobs
-        self.bestMakeSpan = 100**10
         self.bestAssignment = [0,[]]
 
         for job in jobs:
             kNumberOfJobs = len(job[1])
-            for trials in range(1000):
+            self.bestMakeSpan = 100**10
+            for trials in range(len(self.machines.machines)*100):
                 candidateAssignment = [0,[]] #holds an int ofr each job where the int represents which machine to assign the job
                 fakeMachines = []
                 for m in machines.machines:
@@ -30,14 +30,14 @@ class RandomSearchStatistics:
 
                 if max(fakeMachines) < self.bestMakeSpan:
                     self.bestMakeSpan = max(fakeMachines)
-                    self.bestAssignment = candidateAssignment
+                    self.bestAssignment = list(candidateAssignment)
 
             #Found best assignemnt out of n-trials
 
             #have the best assignment be voted for in each job
-            job[0].addVoteForIndex(candidateAssignment[0])
+            job[0].addVoteForIndex(self.bestAssignment[0])
             for i in range(kNumberOfJobs):
-                job[1][i].addVoteForIndex(candidateAssignment[1][i])
+                job[1][i].addVoteForIndex(self.bestAssignment[1][i])
 
 
             #assign job i to its highest voted machine
