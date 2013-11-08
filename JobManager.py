@@ -13,7 +13,7 @@ class JobManager:
         self.jobs = self.readFile.readlines()
         self.readFile.close()
         for i in range(len(self.jobs)):
-            self.jobs[i] = Job.Job(int(self.jobs[i].replace('\n', '')), self.numberOfMachines)
+            self.jobs[i] = Job.Job(int(float(self.jobs[i].replace('\n', ''))), self.numberOfMachines)
             self.sumJobTime += float(self.jobs[i])
         self.MAXJOB = Job.Job(0, self.numberOfMachines)
 
