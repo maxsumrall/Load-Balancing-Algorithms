@@ -8,87 +8,90 @@ __author__ = 'Nina'
 
 
 class ExperimentWriter:
-	Alg_SortedGreedy = 1
-	Alg_Random = 2
-	Algorithms = [Alg_SortedGreedy, Alg_Random]
+    Alg_SortedGreedy = 1
+    Alg_Random = 2
+    Algorithms = [Alg_SortedGreedy, Alg_Random]
 
-	Distr_Normal = 1
-	Distr_Pareto = 2
-	Distributions = [Distr_Normal, Distr_Pareto]
+    Distr_Normal = 1
+    Distr_Pareto = 2
+    Distributions = [Distr_Normal, Distr_Pareto]
 
-	Sort_Sorted = 0
-	Sort_Random = 1
-	Sort_ReverseSorted = 2
-	Sortings = [Sort_Sorted, Sort_Random, Sort_ReverseSorted]
+    Sort_Sorted = 0
+    Sort_Random = 1
+    Sort_ReverseSorted = 2
+    Sortings = [Sort_Sorted, Sort_Random, Sort_ReverseSorted]
 
-	def WriteExperiment(self, Algorithm, Distribution, Sorting, k, m, JobsSizes=range(10, 1000)):
-		#Check input data
-		if not (Algorithm in self.Algorithms):
-			raise ValueError("Please choose one of algorithms from ExperimentWriter class")
+    def WriteExperiment(self, Algorithm, Distribution, Sorting, k, m, JobsSizes=range(10, 1000)):
+        #Check input data
+        if not (Algorithm in self.Algorithms):
+            raise ValueError("Please choose one of algorithms from ExperimentWriter class")
 
-		if not (Distribution in self.Distributions):
-			raise ValueError("Please choose one of distributions from ExperimentWriter class")
+        if not (Distribution in self.Distributions):
+            raise ValueError("Please choose one of distributions from ExperimentWriter class")
 
-		if not (Sorting in self.Sortings):
-			raise ValueError("Please choose one of sortings from ExperimentWriter class")
+        if not (Sorting in self.Sortings):
+            raise ValueError("Please choose one of sortings from ExperimentWriter class")
 
-		Results = []
-		#Generate jobs sets
-		for j in JobsSizes:
-			Jobs = []
-			if Distribution == self.Distr_Normal:
-				Jobs = DistributionGenerator.getGauss(j, 5)
-			elif Distribution == self.Distr_Pareto:
-				Jobs = DistributionGenerator.getPareto(j)
+        Results = []
+        #Generate jobs sets
+        for j in JobsSizes:
+            Jobs = []
+            if Distribution == self.Distr_Normal:
+                Jobs = DistributionGenerator.getGauss(j, 5)
+            elif Distribution == self.Distr_Pareto:
+                Jobs = DistributionGenerator.getPareto(j)
 
-			#Sort input set
-			if Sorting == self.Sort_Sorted:
-				Jobs.sort()
-			elif Sorting == self.Sort_ReverseSorted:
-				Jobs.sort(reverse=True)
+            #Sort input set
+            if Sorting == self.Sort_Sorted:
+                Jobs.sort()
+            elif Sorting == self.Sort_ReverseSorted:
+                Jobs.sort(reverse=True)
 
-			fileName="inputData"+str(j)+".txt";
-			tmpFile=open(fileName,'w')
-			for job in Jobs:
-				tmpFile.write(str(job)+"\n")
+            fileName = "inputData" + str(j) + ".txt";
+            tmpFile = open(fileName, 'w')
+            for job in Jobs:
+                tmpFile.write(str(job) + "\n")
 
-			tmpFile.close()
+            tmpFile.close()
 
-			#Select scheduler
-			Scheduler = None
-			Jobs = JobManager.JobManager(k, fileName, m)
-			machines = MachineBoss.MachineBoss(m)
+            #Select scheduler
+            #Scheduler = None
+            Jobs = JobManager.JobManager(k, fileName, m)
+            machines = MachineBoss.MachineBoss(m)
 
-			if Scheduler == self.Alg_SortedGreedy:
-				Scheduler = SortedGreedyScheduler.SortedGreedyScheduler(machines, Jobs)
+            if Algorithm == self.Alg_SortedGreedy:
+                SortedGreedyScheduler.SortedGreedyScheduler(machines, Jobs)
 
-			elif Scheduler == self.Alg_Random:
-				Scheduler = RandomScheduler.RandomScheduler(machines, Jobs)
+            elif Algorithm == self.Alg_Random:
+                RandomScheduler.RandomScheduler(machines, Jobs)
 
-			makeSpan = machines.maxMachine().makeSpan
-			ratio = Jobs.sumJobTime / float(m)
-			bestS, bestM = "", ""
+            makeSpan = machines.maxMachine().makeSpan
+            #print makeSpan
+            LB=max(Jobs.sumJobTime/float(m),max(Jobs.jobs))
+            ratio = float(makeSpan)/float(LB)
+            bestS, bestM = "", ""
 
-			ResultsRow = []
-			ResultsRow += [k]
-			ResultsRow += [m]
-			ResultsRow += [j]
-			ResultsRow += [makeSpan]
-			ResultsRow += [ratio]
-			ResultsRow += [""]
-			Results += [ResultsRow]
-
-		self.writeResultsToCSV("TryMe.csv", Results)
+            ResultsRow = []
+            ResultsRow += [k]
+            ResultsRow += [m]
+            ResultsRow += [j]
+            ResultsRow += [makeSpan]
+            ResultsRow += [ratio]
+            ResultsRow += [""]
+            Results += [ResultsRow]
 
 
-	def writeResultsToCSV(self, filename, resultsTable):
-		import csv
+        writeResultsToCSV("TryMe.csv", Results)
 
-		with open(filename, 'wb') as csvfile:
-			spamwriter = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-			spamwriter.writerow(['k', 'm', 'JobsNum', 'MakeSpan', 'Ratio', 'Time'])
-			for r in resultsTable:
-				spamwriter.writerow(r)
+
+def writeResultsToCSV(filename, resultsTable):
+    import csv
+
+    with open(filename, 'wb') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        spamwriter.writerow(['k', 'm', 'JobsNum', 'MakeSpan', 'Ratio', 'Time'])
+        for r in resultsTable:
+            spamwriter.writerow(r)
 
 
 Ex = ExperimentWriter()
