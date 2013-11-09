@@ -1,0 +1,73 @@
+M = 20K = 10
+
+normal-3-1.txt
+----------------
+ OPT: 178.5
+Sorted Greedy: 		180.0|| Ratio: 1.00840336134
+RandomScheduler: 	 181.0|| Ratio: 1.01400560224
+Random Search: 		 182.0|| Ratio: 1.01960784314
+RandomSearchStatistics:  183.0|| Ratio: 1.02521008403
+
+normal-6-2.txt
+----------------
+ OPT: 321.25
+Sorted Greedy: 		323.0|| Ratio: 1.00544747082
+RandomScheduler: 	 325.0|| Ratio: 1.01167315175
+Random Search: 		 326.0|| Ratio: 1.01478599222
+RandomSearchStatistics:  331.0|| Ratio: 1.03035019455
+
+normal-100-30.txt
+----------------
+ OPT: 4928.45
+Sorted Greedy: 		4961.0|| Ratio: 1.00660451055
+RandomScheduler: 	 5046.0|| Ratio: 1.02385131228
+Random Search: 		 4971.0|| Ratio: 1.00863354604
+RandomSearchStatistics:  5001.0|| Ratio: 1.01472065254
+
+biNormal-100-300--30.txt
+----------------
+ OPT: 10043.2
+Sorted Greedy: 		10163.0|| Ratio: 1.01192846901
+RandomScheduler: 	 10494.0|| Ratio: 1.04488609208
+Random Search: 		 10200.0|| Ratio: 1.01561255377
+RandomSearchStatistics:  10242.0|| Ratio: 1.01979448781
+
+biNormal-100-300--10.txt
+----------------
+ OPT: 10018.45
+Sorted Greedy: 		10109.0|| Ratio: 1.00903832429
+RandomScheduler: 	 10309.0|| Ratio: 1.02900149225
+Random Search: 		 10148.0|| Ratio: 1.01293114204
+RandomSearchStatistics:  10174.0|| Ratio: 1.01552635388
+
+pareto-1.txt
+----------------
+ OPT: 42250.95
+Sorted Greedy: 		107004.0|| Ratio: 2.53258210762
+RandomScheduler: 	 117586.0|| Ratio: 2.78303801453
+Random Search: 		 87790.0|| Ratio: 2.0778231022
+RandomSearchStatistics:  91053.0|| Ratio: 2.15505213492
+
+pareto-2.txt
+----------------
+ OPT: 9778.05
+Sorted Greedy: 		11057.0|| Ratio: 1.13079806301
+RandomScheduler: 	 10833.0|| Ratio: 1.10788960989
+Random Search: 		 10682.0|| Ratio: 1.09244685801
+RandomSearchStatistics:  10680.0|| Ratio: 1.09224231825
+
+pareto-3.txt
+----------------
+ OPT: 7487.3
+Sorted Greedy: 		7676.0|| Ratio: 1.02520267653
+RandomScheduler: 	 7579.0|| Ratio: 1.01224740561
+Random Search: 		 7567.0|| Ratio: 1.01064469168
+RandomSearchStatistics:  7749.0|| Ratio: 1.0349525196
+
+pareto-4.txt
+----------------
+ OPT: 6636.6
+Sorted Greedy: 		6686.0|| Ratio: 1.0074435705
+RandomScheduler: 	 6781.0|| Ratio: 1.02175812916
+Random Search: 		 6734.0|| Ratio: 1.01467618962
+RandomSearchStatistics:  6752.0|| Ratio: 1.01738842178

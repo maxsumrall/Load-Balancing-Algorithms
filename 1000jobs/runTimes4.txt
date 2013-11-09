@@ -1,0 +1,73 @@
+M = 5K = 5
+
+normal-3-1.txt
+----------------
+ OPT: 714.0
+Sorted Greedy: 		715.0|| Ratio: 1.00140056022 run time: 0.153394937515
+RandomScheduler: 	 717.0|| Ratio: 1.00420168067 run time: 0.29307103157
+Random Search: 		 715.0|| Ratio: 1.00140056022 run time: 0.393460035324
+RandomSearchStatistics:  715.0|| Ratio: 1.00140056022 run time: 0.388733148575
+
+normal-6-2.txt
+----------------
+ OPT: 1285.0
+Sorted Greedy: 		1287.0|| Ratio: 1.00155642023 run time: 0.0300538539886
+RandomScheduler: 	 1290.0|| Ratio: 1.00389105058 run time: 0.294143915176
+Random Search: 		 1286.0|| Ratio: 1.00077821012 run time: 0.415922880173
+RandomSearchStatistics:  1291.0|| Ratio: 1.0046692607 run time: 0.399065971375
+
+normal-100-30.txt
+----------------
+ OPT: 19713.8
+Sorted Greedy: 		19738.0|| Ratio: 1.00122756648 run time: 0.0131640434265
+RandomScheduler: 	 19818.0|| Ratio: 1.00528563747 run time: 0.280148983002
+Random Search: 		 19740.0|| Ratio: 1.00132901825 run time: 0.465991973877
+RandomSearchStatistics:  19748.0|| Ratio: 1.00173482535 run time: 0.394068956375
+
+biNormal-100-300--30.txt
+----------------
+ OPT: 40172.8
+Sorted Greedy: 		40236.0|| Ratio: 1.00157320376 run time: 0.0131649971008
+RandomScheduler: 	 40575.0|| Ratio: 1.01001174924 run time: 0.311305999756
+Random Search: 		 40231.0|| Ratio: 1.00144874144 run time: 0.391229867935
+RandomSearchStatistics:  40292.0|| Ratio: 1.00296718177 run time: 0.42071890831
+
+biNormal-100-300--10.txt
+----------------
+ OPT: 40073.8
+Sorted Greedy: 		40113.0|| Ratio: 1.00097819523 run time: 0.0144100189209
+RandomScheduler: 	 40201.0|| Ratio: 1.0031741437 run time: 0.294538974762
+Random Search: 		 40114.0|| Ratio: 1.00100314919 run time: 0.394294023514
+RandomSearchStatistics:  40117.0|| Ratio: 1.00107801107 run time: 0.404247999191
+
+pareto-1.txt
+----------------
+ OPT: 169003.8
+Sorted Greedy: 		228806.0|| Ratio: 1.35385121518 run time: 0.013190984726
+RandomScheduler: 	 241419.0|| Ratio: 1.42848267317 run time: 0.359894990921
+Random Search: 		 225935.0|| Ratio: 1.33686343147 run time: 0.373612165451
+RandomSearchStatistics:  225645.0|| Ratio: 1.33514749372 run time: 0.406358003616
+
+pareto-2.txt
+----------------
+ OPT: 39112.2
+Sorted Greedy: 		39167.0|| Ratio: 1.00140109736 run time: 0.0132629871368
+RandomScheduler: 	 39456.0|| Ratio: 1.00879009618 run time: 0.303970813751
+Random Search: 		 39147.0|| Ratio: 1.00088974796 run time: 0.377822160721
+RandomSearchStatistics:  39277.0|| Ratio: 1.00421351906 run time: 0.386490106583
+
+pareto-3.txt
+----------------
+ OPT: 29949.2
+Sorted Greedy: 		30000.0|| Ratio: 1.00169620557 run time: 0.0126931667328
+RandomScheduler: 	 29996.0|| Ratio: 1.00156264608 run time: 0.273354053497
+Random Search: 		 29978.0|| Ratio: 1.00096162836 run time: 0.435883045197
+RandomSearchStatistics:  29987.0|| Ratio: 1.00126213722 run time: 0.443148851395
+
+pareto-4.txt
+----------------
+ OPT: 26546.4
+Sorted Greedy: 		26580.0|| Ratio: 1.00126570834 run time: 0.0294499397278
+RandomScheduler: 	 26678.0|| Ratio: 1.00495735768 run time: 0.283130168915
+Random Search: 		 26603.0|| Ratio: 1.00213211584 run time: 0.386676073074
+RandomSearchStatistics:  26640.0|| Ratio: 1.00352590182 run time: 0.408765077591

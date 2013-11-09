@@ -14,15 +14,15 @@ def main():
     files = ["normal-3-1.txt","normal-6-2.txt","normal-100-30.txt","biNormal-100-300--30.txt", "biNormal-100-300--10.txt","pareto-1.txt","pareto-2.txt","pareto-3.txt","pareto-4.txt"]
     #files = ["pareto-1.txt","pareto-2.txt","pareto-3.txt","pareto-4.txt", "biNormal-100-300--30.txt", "biNormal-100-300--10.txt"]
     #files = ["biNormal-100-300--30.txt", "biNormal-100-300--10.txt"]
-    machines = 10
-    kLookAhead = 10
-    writeIO = open('runTimes5.txt','w')
+    machines = 5
+    kLookAhead = 5
+    writeIO = open('runTimes4.txt','w')
     writeIO.write("M = " + str(machines) + "K = " + str(kLookAhead) + "\n")
-    #for inputFile in files:
-    #    writeIO.write("\n"+ inputFile + "\n----------------\n")
-    #    print "\n"+ inputFile + "\n----------------"
-    #    simpleTest(writeIO,inputFile,machines,kLookAhead)
-    randomRetries(files[3],machines,kLookAhead)
+    for inputFile in files:
+        writeIO.write("\n"+ inputFile + "\n----------------\n")
+        print "\n"+ inputFile + "\n----------------"
+        simpleTest(writeIO,inputFile,machines,kLookAhead)
+    #randomRetries(files[3],machines,kLookAhead)
 
 
 
