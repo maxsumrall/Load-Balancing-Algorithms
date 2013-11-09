@@ -10,12 +10,16 @@ import HillClimbingScheduling
 import LeaveRoomSortedGreedy
 
 def main():
-    files = ["normal.txt","input1.txt",'normal-3-1.txt','normal-6-2.txt,''normal-100-30.txt']
+    files = ["normal-3-1.txt","normal-6-2.txt","normal-100-30.txt","biNormal-100-300--30.txt", "biNormal-100-300--10.txt","pareto-1.txt","pareto-2.txt","pareto-3.txt","pareto-4.txt"]
+    #files = ["pareto-1.txt","pareto-2.txt","pareto-3.txt","pareto-4.txt", "biNormal-100-300--30.txt", "biNormal-100-300--10.txt"]
+    #files = ["biNormal-100-300--30.txt", "biNormal-100-300--10.txt"]
     machines = 20
     kLookAhead = 10
-    writeIO = open('runTimes.txt','w')
+    writeIO = open('runTimes1.txt','w')
     writeIO.write("M = " + str(machines) + "K = " + str(kLookAhead) + "\n")
     for inputFile in files:
+        writeIO.write("\n"+ inputFile + "\n----------------\n")
+        print "\n"+ inputFile + "\n----------------"
         simpleTest(writeIO,inputFile,machines,kLookAhead)
 
 
@@ -38,19 +42,21 @@ def simpleTest(writeFile,inputFile,m,k):
         SortedGreedyScheduler.SortedGreedyScheduler(machines,jobs)
 
         makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/float(m)
+        OPT = max(jobs.MAXJOB, jobs.sumJobTime/float(m))
         bestS,bestM = "",""
         if makeSpan < bestS:
             bestS = makeSpan
             bestM = m
-            bestR = ratio
+            bestR = OPT
 
-    writeFile.write(" OPT: " + str(bestR))
+    writeFile.write(" OPT: " + str(bestR)+"\n")
+    print " OPT: " + str(bestR)
 
-    writeFile.write("Sorted Greedy: \t\t" + str(bestS))
+    writeFile.write("Sorted Greedy: \t\t" + str(bestS) + "|| Ratio: " + str(bestS/OPT)+ "\n")
+    print "Sorted Greedy: \t\t" + str(bestS) + "|| Ratio: " + str(bestS/OPT)
 
 
-    for i in range(100):
+    for i in range(5):
         bestM = 1
         bestS = 100000000000
         bestR = 1
@@ -62,64 +68,66 @@ def simpleTest(writeFile,inputFile,m,k):
 
 
             makeSpan =  machines.maxMachine().makeSpan
-            ratio = jobs.sumJobTime/float(m)
-            LB = max(max(jobs.jobs),ratio)
+            OPT = max(jobs.MAXJOB, jobs.sumJobTime/float(m))
             bestS,bestM = "",""
             if makeSpan < bestS:
                 bestS = makeSpan
                 bestM = m
-                bestR = ratio
+                bestR = OPT
             #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
             #print "ratio: " + str(makeSpan/ratio)
 
-    writeFile.write("RandomScheduler: \t " + str(bestS))
+    writeFile.write("RandomScheduler: \t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+"\n")
+    print "RandomScheduler: \t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)
 
     bestM = 1
     bestS = 100000000000
     bestR = 1
-    for m in  range(m,m+1):
+    for i in range(5):
+        for m in  range(m,m+1):
 
-        jobs = JobManager.JobManager(k,inputFile,m)
-        machines = MachineBoss.MachineBoss(m)
-        RandomSearch.RandomSearch(machines,jobs)
+            jobs = JobManager.JobManager(k,inputFile,m)
+            machines = MachineBoss.MachineBoss(m)
+            RandomSearch.RandomSearch(machines,jobs)
 
 
-        makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/float(m)
-        LB = max(max(jobs.jobs),ratio)
-        bestS,bestM = "",""
-        if makeSpan < bestS:
-            bestS = makeSpan
-            bestM = m
-            bestR = ratio
-        #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
-        #print "ratio: " + str(makeSpan/ratio)
+            makeSpan =  machines.maxMachine().makeSpan
+            OPT = max(jobs.MAXJOB, jobs.sumJobTime/float(m))
+            bestS,bestM = "",""
+            if makeSpan < bestS:
+                bestS = makeSpan
+                bestM = m
+                bestR = OPT
+            #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
+            #print "ratio: " + str(makeSpan/ratio)
 
-    print "Random Search: \t\t " + str(bestS)
+    writeFile.write("Random Search: \t\t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+"\n")
+    print "Random Search: \t\t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)
 
 
     bestM = 1
     bestS = 100000000000
     bestR = 1
-    for m in  range(m,m+1):
+    for i in range(5):
+        for m in  range(m,m+1):
 
-        jobs = JobManager.JobManager(k,inputFile,m)
-        machines = MachineBoss.MachineBoss(m)
-        RandomSearchStatistics.RandomSearchStatistics(machines,jobs)
+            jobs = JobManager.JobManager(k,inputFile,m)
+            machines = MachineBoss.MachineBoss(m)
+            RandomSearchStatistics.RandomSearchStatistics(machines,jobs)
 
 
-        makeSpan =  machines.maxMachine().makeSpan
-        ratio = jobs.sumJobTime/float(m)
-        LB = max(max(jobs.jobs),ratio)
-        bestS,bestM = "",""
-        if makeSpan < bestS:
-            bestS = makeSpan
-            bestM = m
-            bestR = ratio
-        #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
-        #print "ratio: " + str(makeSpan/ratio)
+            makeSpan =  machines.maxMachine().makeSpan
+            OPT = max(jobs.MAXJOB, jobs.sumJobTime/float(m))
+            bestS,bestM = "",""
+            if makeSpan < bestS:
+                bestS = makeSpan
+                bestM = m
+                bestR = OPT
+            #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
+            #print "ratio: " + str(makeSpan/ratio)
 
-    print "RandomSearchStatistics:  " + str(bestS)
+    writeFile.write("RandomSearchStatistics:  " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+"\n")
+    print "RandomSearchStatistics:  " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)
 
 
 main()
