@@ -12,7 +12,7 @@ class RandomSearch:
         for job in jobs:
             kNumberOfJobs = len(job[1])
             self.bestMakeSpan = 100**10
-            for trials in range(len(self.machines.machines)*100):
+            for trials in range(len(self.machines.machines)*1):
                 candidateAssignment = [0,[]]
                 fakeMachines = []
                 for m in machines.machines:
