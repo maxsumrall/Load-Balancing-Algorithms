@@ -16,12 +16,14 @@ def main():
     #files = ["biNormal-100-300--30.txt", "biNormal-100-300--10.txt"]
     machines = 5
     kLookAhead = 5
-    writeIO = open('runTimes4.txt','w')
-    writeIO.write("M = " + str(machines) + "K = " + str(kLookAhead) + "\n")
-    for inputFile in files:
-        writeIO.write("\n"+ inputFile + "\n----------------\n")
-        print "\n"+ inputFile + "\n----------------"
-        simpleTest(writeIO,inputFile,machines,kLookAhead)
+    mStep = [5,10,15,20,25,30]
+    kStep = [5,10,15,20,25,30]
+    writeIO = open('pareto-1-MStep.csv','w')
+    writeIO.write("M,K,Sorted Greedy,Random Search, Random Search with History \n")
+    for variable in mStep:
+        #writeIO.write("\n"+ inputFile + "\n----------------\n")
+        #print "\n"+ inputFile + "\n----------------"
+        simpleTest(writeIO,files[5],variable,kStep[0])
     #randomRetries(files[3],machines,kLookAhead)
 
 
@@ -53,7 +55,7 @@ def randomRetries(inputFile,m,k):
         print "Random Search: \t\t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+ " run time: " + str(exTime)
 
 def simpleTest(writeFile,inputFile,m,k):
-
+    line = ""
     bestM = 1
     bestS = 100000000000
     bestR = 0
@@ -73,36 +75,8 @@ def simpleTest(writeFile,inputFile,m,k):
         exTime = time.time() - startTime
 
 
-    writeFile.write(" OPT: " + str(bestR)+"\n")
-    print " OPT: " + str(bestR)
+    line = line + str(m)+","+str(k)+","+str(bestS/OPT) + ","
 
-    writeFile.write("Sorted Greedy: \t\t" + str(bestS) + "|| Ratio: " + str(bestS/OPT)+ " run time: " + str(exTime)+ "\n")
-    print "Sorted Greedy: \t\t" + str(bestS) + "|| Ratio: " + str(bestS/OPT) + " run time: " + str(exTime)
-
-    bestM = 1
-    bestS = 100000000000
-    bestR = 1
-    for i in range(5):
-        for m in  range(m,m+1):
-            startTime = time.time()
-            jobs = JobManager.JobManager(k,inputFile,m)
-            machines = MachineBoss.MachineBoss(m)
-            RandomScheduler.RandomScheduler(machines,jobs)
-
-
-            makeSpan =  machines.maxMachine().makeSpan
-            OPT = max(jobs.MAXJOB, jobs.sumJobTime/float(m))
-            bestS,bestM = "",""
-            if makeSpan < bestS:
-                bestS = makeSpan
-                bestM = m
-                bestR = OPT
-            exTime = time.time() - startTime
-            #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
-            #print "ratio: " + str(makeSpan/ratio)
-
-    writeFile.write("RandomScheduler: \t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+ " run time: " + str(exTime)+"\n")
-    print "RandomScheduler: \t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+ " run time: " + str(exTime)
 
     bestM = 1
     bestS = 100000000000
@@ -126,8 +100,7 @@ def simpleTest(writeFile,inputFile,m,k):
             #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
             #print "ratio: " + str(makeSpan/ratio)
 
-    writeFile.write("Random Search: \t\t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+ " run time: " + str(exTime)+"\n")
-    print "Random Search: \t\t " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+ " run time: " + str(exTime)
+    line = line + str(bestS/OPT) +","
 
 
     bestM = 1
@@ -152,8 +125,8 @@ def simpleTest(writeFile,inputFile,m,k):
             #print "Max Machine Run time: "+ str(makeSpan) + " OPT for " + str(m) + " machines is " + str(ratio)
             #print "ratio: " + str(makeSpan/ratio)
 
-    writeFile.write("RandomSearchStatistics:  " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+ " run time: " + str(exTime)+"\n")
-    print "RandomSearchStatistics:  " + str(bestS)+ "|| Ratio: " + str(bestS/OPT)+ " run time: " + str(exTime)
+    line = line+ str(bestS/OPT) + "\n"
+    writeFile.write(line)
 
 
 main()
