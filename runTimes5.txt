@@ -1,0 +1,14 @@
+M = 20K = 10
+
+normal-3-1.txt
+----------------
+ OPT: 18.2
+Sorted Greedy: 		19.0|| Ratio: 1.04395604396 run time: 0.0614309310913
+RandomScheduler: 	 24.0|| Ratio: 1.31868131868 run time: 0.27659201622
+Random Search: 		 23.0|| Ratio: 1.26373626374 run time: 0.0249099731445
+RandomSearchStatistics:  22.0|| Ratio: 1.20879120879 run time: 0.336194992065
+
+normal-6-2.txt
+----------------
+ OPT: 33.2
+Sorted Greedy: 		36.0|| Ratio: 1.0843373494 run time: 0.0290141105652

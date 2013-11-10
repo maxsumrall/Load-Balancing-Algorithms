@@ -25,6 +25,12 @@ for i in range(1000):
 file.close()
 
 
+file = open('pareto-1p1.txt','w')
+for i in range(1000):
+    file.write(str(int((random.paretovariate(1.1))*100))+"\n")
+file.close()
+
+
 file = open('pareto-2.txt','w')
 for i in range(1000):
     file.write(str(int((random.paretovariate(2))*100))+"\n")

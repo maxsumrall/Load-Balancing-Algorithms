@@ -11,18 +11,18 @@ import LeaveRoomSortedGreedy
 import time
 
 def main():
-    files = ["normal-3-1.txt","normal-6-2.txt","normal-100-30.txt","biNormal-100-300--30.txt", "biNormal-100-300--10.txt","pareto-1.txt","pareto-2.txt","pareto-3.txt","pareto-4.txt"]
+    files = ["normal-3-1.txt","normal-6-2.txt","normal-100-30.txt","biNormal-100-300--30.txt", "biNormal-100-300--10.txt","pareto-1.txt","pareto-2.txt","pareto-3.txt","pareto-4.txt","pareto-1p1.txt"]
     #files = ["pareto-1.txt","pareto-2.txt","pareto-3.txt","pareto-4.txt", "biNormal-100-300--30.txt", "biNormal-100-300--10.txt"]
     #files = ["biNormal-100-300--30.txt", "biNormal-100-300--10.txt"]
     machines = 5
     kLookAhead = 5
     mStep = [5,10,15,20,25,30]
     kStep = [5,10,15,20,25,30]
-    writeIO = open('pareto-2-KStep.csv','w')
+    writeIO = open('pareto-1p1-KStep.csv','w')
     writeIO.write("M,K,Sorted Greedy,Random Search, Random Search with History \n")
     for variable in kStep:
-        #simpleTest(writeIO,files[6],variable,kStep[1]) #m variates
-        simpleTest(writeIO,files[6],mStep[1],variable) #k variates
+        #simpleTest(writeIO,files[9],variable,kStep[1]) #m variates
+        simpleTest(writeIO,files[9],mStep[1],variable) #k variates
     #randomRetries(files[3],machines,kLookAhead)
 
 
