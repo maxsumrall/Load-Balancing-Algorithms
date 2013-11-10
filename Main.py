@@ -18,12 +18,11 @@ def main():
     kLookAhead = 5
     mStep = [5,10,15,20,25,30]
     kStep = [5,10,15,20,25,30]
-    writeIO = open('pareto-1-MStep.csv','w')
+    writeIO = open('pareto-2-KStep.csv','w')
     writeIO.write("M,K,Sorted Greedy,Random Search, Random Search with History \n")
-    for variable in mStep:
-        #writeIO.write("\n"+ inputFile + "\n----------------\n")
-        #print "\n"+ inputFile + "\n----------------"
-        simpleTest(writeIO,files[5],variable,kStep[0])
+    for variable in kStep:
+        #simpleTest(writeIO,files[6],variable,kStep[1]) #m variates
+        simpleTest(writeIO,files[6],mStep[1],variable) #k variates
     #randomRetries(files[3],machines,kLookAhead)
 
 
@@ -76,7 +75,7 @@ def simpleTest(writeFile,inputFile,m,k):
 
 
     line = line + str(m)+","+str(k)+","+str(bestS/OPT) + ","
-
+    print "SG"
 
     bestM = 1
     bestS = 100000000000
@@ -101,7 +100,7 @@ def simpleTest(writeFile,inputFile,m,k):
             #print "ratio: " + str(makeSpan/ratio)
 
     line = line + str(bestS/OPT) +","
-
+    print "RS"
 
     bestM = 1
     bestS = 100000000000
@@ -127,6 +126,7 @@ def simpleTest(writeFile,inputFile,m,k):
 
     line = line+ str(bestS/OPT) + "\n"
     writeFile.write(line)
+    print "RSH"
 
 
 main()
